@@ -1,3 +1,4 @@
+import ClientWrapper from "@/components/ClientWrapper";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -7,15 +8,10 @@ import EducationCertifications from "@/components/EducationCertifications";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-interface PageProps {
-  theme: "dark" | "light";
-  toggleTheme: () => void;
-}
-
-export default function Home({ theme, toggleTheme }: PageProps) {
+export default function Home() {
   return (
-    <>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+    <ClientWrapper>
+      <Navbar />
       <main className="relative z-10 space-y-4">
         <Hero />
         <About />
@@ -25,6 +21,6 @@ export default function Home({ theme, toggleTheme }: PageProps) {
         <Contact />
       </main>
       <Footer />
-    </>
+    </ClientWrapper>
   );
 }
