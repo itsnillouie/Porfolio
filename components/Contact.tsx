@@ -51,8 +51,7 @@ export default function Contact() {
         </h2>
 
         <p className="text-sm text-slate-500 max-w-md mx-auto">
-          Have a role, project, or collaboration opportunity? I'd love to hear
-          from you.
+          Have a role, project, or collaboration opportunity? I&apos;d love to hear from you.
         </p>
       </div>
 

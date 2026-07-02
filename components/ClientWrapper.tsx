@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
@@ -18,6 +18,7 @@ export default function ClientWrapper() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   const { scrollYProgress } = useScroll();
+
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -33,13 +34,13 @@ export default function ClientWrapper() {
   }, [theme]);
 
   useEffect(() => {
-    const toggleVisibility = () => {
+    const handleScroll = () => {
       setShowBackToTop(window.scrollY > 500);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -56,13 +57,18 @@ export default function ClientWrapper() {
 
       {/* Background Blobs */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-40 dark:opacity-20">
-        <div className="absolute top-[20%] left-[10%] w-72 h-72 rounded-full bg-brand-blue mix-blend-multiply blur-3xl animate-blob" />
-        <div className="absolute top-[40%] right-[10%] w-96 h-96 rounded-full bg-brand-purple mix-blend-multiply blur-3xl animate-blob [animation-delay:2s]" />
-        <div className="absolute bottom-[20%] left-[30%] w-80 h-80 rounded-full bg-brand-cyan mix-blend-multiply blur-3xl animate-blob [animation-delay:4s]" />
+        <div className="absolute top-[20%] left-[10%] w-72 h-72 rounded-full bg-brand-blue mix-blend-multiply filter blur-3xl animate-blob" />
+        <div className="absolute top-[40%] right-[10%] w-96 h-96 rounded-full bg-brand-purple mix-blend-multiply filter blur-3xl animate-blob [animation-delay:2s]" />
+        <div className="absolute bottom-[20%] left-[30%] w-80 h-80 rounded-full bg-brand-cyan mix-blend-multiply filter blur-3xl animate-blob [animation-delay:4s]" />
       </div>
 
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      {/* Navbar */}
+      <Navbar
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
 
+      {/* Main Content */}
       <main className="relative z-10 space-y-4">
         <Hero />
         <About />
@@ -72,11 +78,18 @@ export default function ClientWrapper() {
         <Contact />
       </main>
 
+      {/* Footer */}
       <Footer />
 
+      {/* Back to Top */}
       {showBackToTop && (
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            })
+          }
           className="fixed bottom-6 right-6 p-3 rounded-full bg-brand-blue text-white shadow-lg shadow-brand-blue/20 hover:scale-110 active:scale-95 transition-transform z-40"
         >
           <ArrowUp size={20} />

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ClientWrapper from "@/components/ClientWrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Neil Louie C. Budol | Full-Stack Software Engineer",
-  description: "Portfolio of Neil Louie C. Budol - Full-Stack Software Engineer specializing in backend systems, scalable web applications, and database architecture.",
+  description:
+    "Portfolio of Neil Louie C. Budol - Full-Stack Software Engineer",
 };
 
 export default function RootLayout({
@@ -17,8 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} transition-colors duration-300 bg-[#F8FAFC] text-slate-800 dark:bg-[#0F172A] dark:text-slate-100 min-h-screen overflow-x-hidden`}>
-        <ClientWrapper>{children}</ClientWrapper>
+      <body
+        className={`${inter.className} bg-[#F8FAFC] text-slate-800 dark:bg-[#0F172A] dark:text-slate-100 transition-colors duration-300 overflow-x-hidden`}
+      >
+        {children}
       </body>
     </html>
   );
